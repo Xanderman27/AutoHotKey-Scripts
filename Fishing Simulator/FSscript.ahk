@@ -3,37 +3,43 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance, Force
 CoordMode, Pixel, Relative
 CoordMode, Mouse, Relative
-reelX := (801 * (A_ScreenWidth / 1920))
-reelY := (833 * (A_ScreenHeight / 1080))
+Width := A_ScreenWidth / 1920
+Height := A_ScreenHeight / 1080
+reelX := (801 * Width)
+reelY := (833 * Height)
 
 Start:
 Pause
 Cast:
-ImageSearch, x, y, (1189 * (A_ScreenWidth / 1920)), (964 * (A_ScreenHeight / 1080)), (1278 * (A_ScreenWidth / 1920)), (1042 * (A_ScreenHeight / 1080)), FSfullbp.png
-if (ErrorLevel = 1)
+Sleep 500
+Click
+sleep 3150 ; Change this to calibrate for hook speed
+Click
+sleep 50
+PixelGetColor, color, %reelX%, %reelY%, RGB
+While (color = 0xFB624C)
 {
-	Click
-	sleep 3150 ; Change this # to calibrate for hook speed
-	Click
-	PixelGetColor, color, %reelX%, %reelY%, RGB
-	If (color = 0xFB624C)
+	PixelGetColor, tcolor, (937 * Width), (811 * Height), RGB
+	if (tcolor = 0xFFFFFF)
 	{
-		While (color = 0xFB624C)
-		{
-			Click, 2
-			sleep 900 ; Change this # to calibrate for strength and reeling speed
-			PixelGetColor, color, %reelX%, %reelY%, RGB
-		}
-	
+		Click, 2
 	}
-	Else
-		{	
-			Goto, Cast
-		}
-	Goto, Cast
+	Sleep 50
+	PixelGetColor, color, %reelX%, %reelY%, RGB
 }
-else
-{
-ExitApp
-}
+Goto, Cast
+
 ^!p:: Pause
+
+F5::
+Send {Esc}r{Enter}
+
+F6:: ; this is for debugging purposes
+Loop
+{
+	MouseGetPos, mx, my
+	PixelGetColor, mcolor, %mx%, %my%, RGB
+	ToolTip, %mx% %my% %mcolor%
+	sleep 150
+}
+
