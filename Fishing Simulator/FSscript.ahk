@@ -19,21 +19,24 @@ if (hcolor = 0xFD0061)
 	{
 		Goto, Start
 	}
-sleep 3150 ; Change this to calibrate for hook speed
-Click
-sleep 50
-PixelGetColor, color, %reelX%, %reelY%, RGB
-While (color = 0xFB624C)
+Else
 {
-	PixelGetColor, tcolor, (937 * Width), (811 * Height), RGB
-	if (tcolor = 0xFD0061)
-	{
-		Goto, Start
-	}
-	Sleep 50
+	sleep 3150 ; Change this to calibrate for hook speed
+	Click
+	sleep 50
 	PixelGetColor, color, %reelX%, %reelY%, RGB
+	While (color = 0xFB624C)
+	{
+		PixelGetColor, tcolor, (937 * Width), (811 * Height), RGB
+		if (tcolor = 0xFFFFFF)
+		{
+			Click, 2
+		}
+		Sleep 50
+		PixelGetColor, color, %reelX%, %reelY%, RGB
+	}
+	Goto, Cast
 }
-Goto, Cast
 
 ^!p:: Pause
 
