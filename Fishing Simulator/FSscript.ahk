@@ -13,6 +13,12 @@ Pause
 Cast:
 Sleep 500
 Click
+Sleep 300
+PixelGetColor, hcolor, (821 * Width), (707 * Height), RGB
+if (hcolor = 0xFD0061)
+	{
+		Goto, Start
+	}
 sleep 3150 ; Change this to calibrate for hook speed
 Click
 sleep 50
@@ -20,9 +26,9 @@ PixelGetColor, color, %reelX%, %reelY%, RGB
 While (color = 0xFB624C)
 {
 	PixelGetColor, tcolor, (937 * Width), (811 * Height), RGB
-	if (tcolor = 0xFFFFFF)
+	if (tcolor = 0xFD0061)
 	{
-		Click, 2
+		Goto, Start
 	}
 	Sleep 50
 	PixelGetColor, color, %reelX%, %reelY%, RGB
@@ -42,4 +48,3 @@ Loop
 	ToolTip, %mx% %my% %mcolor%
 	sleep 150
 }
-
