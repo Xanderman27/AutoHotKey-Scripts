@@ -16,38 +16,35 @@ Click
 Sleep 300
 PixelGetColor, hcolor, (821 * Width), (707 * Height), RGB
 if (hcolor = 0xFD0061)
-	{
-		Goto, Start
-	}
-Else
 {
-	sleep 3150 ; Change this to calibrate for hook speed
-	Click
-	sleep 50
-	PixelGetColor, color, %reelX%, %reelY%, RGB
-	While (color = 0xFB624C)
-	{
-		PixelGetColor, tcolor, (937 * Width), (811 * Height), RGB
-		if (tcolor = 0xFFFFFF)
-		{
-			Click, 2
-		}
-		Sleep 50
-		PixelGetColor, color, %reelX%, %reelY%, RGB
-	}
-	Goto, Cast
+	Goto, Start
 }
+sleep 2850 ; Change this to calibrate for hook speed
+Click
+sleep 50
+PixelGetColor, color, %reelX%, %reelY%, RGB
+While (color = 0xFB624C)
+{
+	PixelGetColor, tcolor, (937 * Width), (811 * Height), RGB
+	if (tcolor = 0xFFFFFF)
+	{
+		Click, 2
+	}	
+	Sleep 50
+	PixelGetColor, color, %reelX%, %reelY%, RGB
+}
+Goto, Cast
+
 
 ^!p:: Pause
 
-F5::
-Send {Esc}r{Enter}
+;F5:: Send {Esc}r{Enter}
 
-F6:: ; this is for debugging purposes
-Loop
-{
-	MouseGetPos, mx, my
-	PixelGetColor, mcolor, %mx%, %my%, RGB
-	ToolTip, %mx% %my% %mcolor%
-	sleep 150
-}
+;F6:: ; this is for debugging purposes
+;Loop
+;{
+;	MouseGetPos, mx, my
+;	PixelGetColor, mcolor, %mx%, %my%, RGB
+;	ToolTip, %mx% %my% %mcolor%
+;	sleep 150
+;}
