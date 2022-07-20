@@ -11,5 +11,5 @@ Do note that you may get banned using these scripts.
 
  - Works on 16:9 Monitors (Haven't tested it but doubt it works on other ratios)
 
- - Adjust Line 24 to adjust for different hook speeds
+ - Adjust Line 22 to adjust for different hook speeds
 
