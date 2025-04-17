@@ -13,3 +13,6 @@ Do note that you may get banned using these scripts.
 
  - Adjust Line 22 to adjust for different hook speeds
 
+### Be Fish (Roblox)
+- Ctrl + Shift + p to toggle the script on/off
+- Made for 1440p monitors
